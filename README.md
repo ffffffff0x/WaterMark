@@ -35,3 +35,7 @@ main.exe -img 11.png -width 300 -hight 300
 ```
 ./main.exe -width 500 -hight 500 -img 1.png
 ```
+
+---
+
+> create by ffffffff0x
