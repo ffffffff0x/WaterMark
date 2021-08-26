@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"io/ioutil"
+	"github.com/gookit/color"
 )
 
 var Input_img = flag.String("img", "", "输入文件名")
@@ -41,7 +42,7 @@ func main() {
 
 func imgwater() {
 
-	fmt.Println("目标图片:",*Input_img)
+	color.Cyan.Println("目标图片:",*Input_img)
 
 	srcImg := *Input_img             // 原始图片
 	imgWaterMarkPath := *Input_logo // 水印图片
@@ -49,7 +50,7 @@ func imgwater() {
 	// 原始图片
 	originalImg, err := os.Open(srcImg)
 	if err != nil {
-		fmt.Println("打开原始图片出错")
+		color.Red.Println("打开原始图片出错")
 	}
 	//
 	defer originalImg.Close()
@@ -57,13 +58,13 @@ func imgwater() {
 	// 水印图片
 	waterMark, err := os.Open(imgWaterMarkPath)
 	if err != nil {
-		fmt.Println("打开水印图片出错")
+		color.Red.Println("打开水印图片出错")
 	}
 	defer waterMark.Close()
 
 	waterMarkImg, err := png.Decode(waterMark)
 	if err != nil {
-		fmt.Println("把水印图片解码为结构体时出错")
+		color.Red.Println("把水印图片解码为结构体时出错")
 	}
 
 	buff := make([]byte, 512)
@@ -84,7 +85,7 @@ func imgwater() {
 		//fmt.Println("这是JPG文件")
 		imgJpeg, err := jpeg.Decode(originalImg)
 		if err != nil {
-			fmt.Println("把jpeg图片解码为结构体时出错")
+			color.Red.Println("把jpeg图片解码为结构体时出错")
 		}
 
 		b := imgJpeg.Bounds()
@@ -127,14 +128,14 @@ func imgwater() {
 		// png.Encode(imgw, m)
 		defer imgNew.Close()
 
-		fmt.Println("添加JPG水印图片结束请查看")
+		color.Green.Print("添加JPG水印图片结束请查看\n")
 	}
 
 	if imgType == "image/png" {
 		//fmt.Println("这是PNG文件")
 		imgPng, err := png.Decode(originalImg)
 		if err != nil {
-			fmt.Println("把PNG图片解码为结构体时出错")
+			color.Red.Println("把PNG图片解码为结构体时出错")
 		}
 		b := imgPng.Bounds()
 		waterMarkWidth := b.Max.X
@@ -174,15 +175,15 @@ func imgwater() {
 			log.Println(err)
 		}
 		defer imgNew.Close()
-		fmt.Println("添加PNG水印图片结束请查看")
+		color.Green.Println("添加PNG水印图片结束请查看")
 	}
 	if imgType == "image/gif" {
-		fmt.Println("暂不支持 gif 格式。。。")
+		color.Yellow.Println("暂不支持 gif 格式")
 	}
 }
 
 func imgwater_dir() {
-	fmt.Println("目标文件夹:",*Input_dir)
+	color.Cyan.Println("目标文件夹:",*Input_dir)
 	files, _ := ioutil.ReadDir(*Input_dir)
 	for _, f := range files {
 		*Input_img=*Input_dir + "/" +f.Name()
