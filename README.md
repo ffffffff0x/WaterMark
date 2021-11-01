@@ -8,6 +8,8 @@
 
 ## 效果
 
+> 水印图片默认使用 logo.png ,请自行添加
+
 ```
 main.exe -img 11.png -width 300 -hight 300
 ```
