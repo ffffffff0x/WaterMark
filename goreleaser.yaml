@@ -2,6 +2,7 @@ project_name: example
 builds:
   - binary: main
     goos:
+      - linux
       - windows
     goarch:
       - amd64
