@@ -1,0 +1,7 @@
+project_name: example
+builds:
+  - binary: main
+    goos:
+      - windows
+    goarch:
+      - amd64

@@ -14,7 +14,7 @@ main.exe -img 11.png -width 300 -hight 300
 
 ![](./demo.png)
 
-## 使用命令
+## Usage
 
 单文件添加水印
 ```
